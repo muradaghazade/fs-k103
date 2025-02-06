@@ -9,9 +9,8 @@ class Story(models.Model):
     image = models.ImageField(upload_to='files/')
     text = models.TextField()
     views = models.IntegerField(default=0)
-    # category
-    # tag
-    # comment
+    category = models.ForeignKey('Category', related_name='stories' , on_delete=models.CASCADE, null=True, blank=True)
+    tag = models.ManyToManyField('Tag', related_name='stories', blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -23,9 +22,8 @@ class Recipe(models.Model):
     image = models.ImageField(upload_to='files/')
     text = models.TextField()
     views = models.IntegerField(default=0)
-    # category
-    # tag
-    # comment
+    category = models.ForeignKey('Category', related_name='recipes' , on_delete=models.CASCADE, null=True, blank=True)
+    tag = models.ManyToManyField('Tag', related_name='recipes', blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -35,6 +33,7 @@ class Comment(models.Model):
     # user
     text = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
+    story = models.ForeignKey('Story', related_name='comments', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.text
