@@ -3,17 +3,18 @@
 
 {% block content %}
 <section class="home-slider owl-carousel">
+    {% for story in stories %}
     <div class="slider-item">
         <div class="container">
             <div class="row d-flex slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
-                <div class="img" style="background-image: url(images/bg_1.jpg);"></div>
+                <div class="img" style="background-image: url('{{ story.image.url}}');"></div>
 
                 <div class="text d-flex align-items-center ftco-animate">
                     <div class="text-2 pb-lg-5 mb-lg-4 px-4 px-md-5">
                         <h3 class="subheading mb-3">Featured Posts</h3>
-                        <h1 class="mb-5">Love the Delicious &amp; Tasty Foods</h1>
-                        <p class="mb-md-5">A small river named Duden flows by their place and supplies it with the necessary regelialia</p>
+                        <h1 class="mb-5">{{ story.title }}</h1>
+                        <p class="mb-md-5">{{ story.description | truncatewords:20 }}</p>
                         <p><a href="#" class="btn btn-black px-3 px-md-4 py-3">Read More <span
                             class="icon-arrow_forward ml-lg-4"></span></a></p>
                     </div>
@@ -22,26 +23,7 @@
             </div>
         </div>
     </div>
-
-    <div class="slider-item">
-        <div class="container">
-            <div class="row d-flex slider-text justify-content-center align-items-center" data-scrollax-parent="true">
-
-                <div class="img" style="background-image: url(images/bg_2.jpg);"></div>
-
-                <div class="text d-flex align-items-center ftco-animate">
-                    <div class="text-2 pb-lg-5 mb-lg-4 px-4 px-md-5">
-                        <h3 class="subheading mb-3">Featured Posts</h3>
-                        <h1 class="mb-5">I am A Blogger &amp; I Love Foods</h1>
-                        <p class="mb-md-5">A small river named Duden flows by their place and supplies it with the necessary regelialia</p>
-                        <p><a href="#" class="btn btn-black px-3 px-md-4 py-3">Read More <span
-                            class="icon-arrow_forward ml-lg-4"></span></a></p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
+    {% endfor %}
 </section>
 
 
@@ -68,62 +50,25 @@
             </div>
             <div class="col-md-6">
                 <div class="row">
+                    {% for story in stories %}
                     <div class="col-md-6 ftco-animate">
                         <div class="blog-entry">
-                            <a href="single.html" class="img d-flex align-items-end" style="background-image: url(images/image_1.jpg);">
+                            <a href="single.html" class="img d-flex align-items-end" style="background-image: url({{story.image.url}});">
                                 <div class="overlay"></div>
                             </a>
                             <div class="text pt-3">
-                                <p class="meta d-flex"><span class="pr-3">Dessert</span><span class="ml-auto pl-3">March 01, 2018</span>
+                                <p class="meta d-flex"><span class="pr-3">{{ story.category }}</span><span class="ml-auto pl-3">{{ story.date | date:"M d, Y"  }}</span>
                                 </p>
-                                <h3><a href="single.html">Tasty &amp; Delicious Foods</a></h3>
+                                <h3><a href="single.html">{{ story.title }}</a></h3>
                                 <p class="mb-0"><a href="single.html" class="btn-custom">Read More <span
                                     class="icon-arrow_forward ml-4"></span></a></p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 ftco-animate">
-                        <div class="blog-entry">
-                            <a href="single.html" class="img d-flex align-items-end" style="background-image: url(images/image_3.jpg);">
-                                <div class="overlay"></div>
-                            </a>
-                            <div class="text pt-3">
-                                <p class="meta d-flex"><span class="pr-3">Dessert</span><span class="ml-auto pl-3">March 01, 2018</span>
-                                </p>
-                                <h3><a href="single.html">Tasty &amp; Delicious Foods from Scotland</a></h3>
-                                <p class="mb-0"><a href="single.html" class="btn-custom">Read More <span
-                                    class="icon-arrow_forward ml-4"></span></a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 ftco-animate">
-                        <div class="blog-entry">
-                            <a href="single.html" class="img d-flex align-items-end" style="background-image: url(images/image_4.jpg);">
-                                <div class="overlay"></div>
-                            </a>
-                            <div class="text pt-3">
-                                <p class="meta d-flex"><span class="pr-3">Dessert</span><span class="ml-auto pl-3">March 01, 2018</span>
-                                </p>
-                                <h3><a href="single.html">Tasty &amp; Delicious Foods</a></h3>
-                                <p class="mb-0"><a href="single.html" class="btn-custom">Read More <span
-                                    class="icon-arrow_forward ml-4"></span></a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 ftco-animate">
-                        <div class="blog-entry">
-                            <a href="single.html" class="img d-flex align-items-end" style="background-image: url(images/image_5.jpg);">
-                                <div class="overlay"></div>
-                            </a>
-                            <div class="text pt-3">
-                                <p class="meta d-flex"><span class="pr-3">Dessert</span><span class="ml-auto pl-3">March 01, 2018</span>
-                                </p>
-                                <h3><a href="single.html">Tasty &amp; Delicious Foods</a></h3>
-                                <p class="mb-0"><a href="single.html" class="btn-custom">Read More <span
-                                    class="icon-arrow_forward ml-4"></span></a></p>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
+                   
+                   
+                    
                 </div>
             </div>
         </div>
