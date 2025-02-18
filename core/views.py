@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from core.models import Story, Category
+from core.models import *
 
 
 def home(request):
@@ -14,3 +14,17 @@ def home(request):
         'holiday_stories': holiday_stories
     }
     return render(request, 'index.html', context)
+
+
+def story_detail(request, id):
+    story = Story.objects.get(id=id)
+    categories = Category.objects.all()
+    tags = Tag.objects.all()
+    recent_stories = Story.objects.order_by('-id')[:3]
+    context = {
+        'story': story,
+        'categories': categories,
+        'tags': tags,
+        'recent_stories': recent_stories,
+    }
+    return render(request, 'single.html', context)
