@@ -28,3 +28,13 @@ def story_detail(request, id):
         'recent_stories': recent_stories,
     }
     return render(request, 'single.html', context)
+
+
+def stories(request):
+    stories = Story.objects.order_by('-id')
+    categories = Category.objects.all()
+    context = {
+        'stories': stories,
+        'categories': categories,
+    }
+    return render(request, 'stories.html', context)
