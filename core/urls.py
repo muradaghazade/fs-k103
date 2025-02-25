@@ -6,4 +6,5 @@ app_name = 'core'
 urlpatterns = [
     path('', home , name='home'),
     path('story/<int:id>/', story_detail , name='story_detail'),
+    path('stories/', stories , name='stories'),
 ]

@@ -31,7 +31,10 @@ def story_detail(request, id):
 
 
 def stories(request):
+    search = request.GET.get('search')
     stories = Story.objects.order_by('-id')
+    if search:
+        stories = stories.filter(title__icontains=search)
     categories = Category.objects.all()
     context = {
         'stories': stories,
