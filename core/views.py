@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from core.models import *
+from core.forms import *
 
 
 def home(request):
@@ -41,3 +42,16 @@ def stories(request):
         'categories': categories,
     }
     return render(request, 'stories.html', context)
+
+def about(request):
+    return render(request, 'about.html')
+
+def contact(request):
+    if request.method=='POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            print('salam')
+            form.save()
+            return redirect('core:home')
+    form=ContactForm()
+    return render(request, 'contact.html', {'form': form})
