@@ -55,3 +55,30 @@ def contact(request):
             return redirect('core:home')
     form=ContactForm()
     return render(request, 'contact.html', {'form': form})
+
+
+def recipes(request):
+    recipes = Recipe.objects.order_by('-id')
+    search = request.GET.get('search')
+    if search:
+        recipes = recipes.filter(title__icontains=search)
+    categories = Category.objects.all()
+    context = {
+        'recipes': recipes,
+        'categories': categories,
+    }
+    return render(request, 'recipes.html', context)
+
+
+def recipe_detail(request, id):
+    recipe = Recipe.objects.get(id=id)
+    categories = Category.objects.all()
+    tags = Tag.objects.all()
+    recent_recipes = Recipe.objects.order_by('-id')[:3]
+    context = {
+        'story': recipe,
+        'categories': categories,
+        'tags': tags,
+        'recent_stories': recent_recipes,
+    }
+    return render(request, 'single.html', context)
