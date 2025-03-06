@@ -32,8 +32,21 @@ def story_detail(request, id):
 
 
 def stories(request):
-    search = request.GET.get('search')
     stories = Story.objects.order_by('-id')
+
+
+
+    tag = request.GET.get('tag')
+    if tag:
+        stories = Story.objects.filter(tag__title=tag).order_by('-id')
+
+
+
+        
+    cat = request.GET.get('cat')
+    if cat:
+        stories = Story.objects.filter(category__title=cat).order_by('-id')
+    search = request.GET.get('search')
     if search:
         stories = stories.filter(title__icontains=search)
     categories = Category.objects.all()

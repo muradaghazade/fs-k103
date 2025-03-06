@@ -4,7 +4,7 @@
         <ul class="category-image">
             {% for category in categories %}
             <li>
-                <a href="#" class="img d-flex align-items-center justify-content-center text-center" style="background-image: url({{category.image.url}});">
+                <a href="{% url 'core:stories' %}?cat={{category.title}}" class="img d-flex align-items-center justify-content-center text-center" style="background-image: url({{category.image.url}});">
                     <div class="text">
                         <h3>{{category.title}}</h3>
                     </div>
