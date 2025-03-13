@@ -8,10 +8,11 @@ class RegisterView(CreateView):
     model = User
     template_name = 'register.html'
     form_class = RegisterForm
-    success_url = '/'
+    success_url = '/accounts/login/'
 
 
 class LoginUser(LoginView):
-    model = User
+     
     template_name = 'login.html'
     form_class = LoginForm
+    success_url = '/'
