@@ -1,5 +1,6 @@
 from django import forms
 from accounts.models import User
+from django.contrib.auth.forms import AuthenticationForm
 
 class RegisterForm(forms.ModelForm):
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
@@ -15,4 +16,15 @@ class RegisterForm(forms.ModelForm):
             'image': forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'Image'}),
             'info': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Info'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
+        }
+
+
+class LoginForm(AuthenticationForm):
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
+
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}),
         }
