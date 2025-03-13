@@ -16,3 +16,5 @@ class LoginUser(LoginView):
     template_name = 'login.html'
     form_class = LoginForm
     success_url = '/'
+
+

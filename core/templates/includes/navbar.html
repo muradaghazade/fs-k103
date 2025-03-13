@@ -12,8 +12,14 @@
                 <li class="nav-item"><a href="{% url 'core:stories' %}" class="nav-link">Stories</a></li>
                 <li class="nav-item"><a href="{% url 'core:recipes' %}" class="nav-link">Recipes</a></li>
                 <li class="nav-item"><a href="{% url 'core:contact' %}" class="nav-link">Contact</a></li>
-                <li style="margin-right: 10px;"><a href="{% url 'accounts:login' %}" class="btn btn-black px-3 px-md-4 py-3">Login</a></li>
-                <li><a href="{% url 'accounts:register' %}" class="btn btn-black px-3 px-md-4 py-3">Register</a></li>
+                {% if request.user.is_authenticated %}
+                <li><a href="" class="btn btn-black px-3 px-md-4 py-3 mr-1">{{request.user.username}}</a></li>
+                <li><a href="{% url 'accounts:logout' %}" class="btn btn-black px-3 px-md-4 py-3 ">Logout</a></li>
+
+                {% else %}
+                <li style="margin-right: 10px;"><a href="{% url 'accounts:login' %}" class="btn btn-black px-3 px-md-4 py-3 mr-1">Login</a></li>
+                <li><a href="{% url 'accounts:register' %}" class="btn btn-black px-3 px-md-4 py-3 ">Register</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
