@@ -12,9 +12,14 @@ class RegisterView(CreateView):
 
 
 class LoginUser(LoginView):
-     
     template_name = 'login.html'
     form_class = LoginForm
     success_url = '/'
 
+def user_profile(request, id):
+    user = User.objects.get(id=id)
+    context = {
+        'user': user,
+    }
+    return render(request, 'user-profile.html', context)
 
