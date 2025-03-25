@@ -8,11 +8,14 @@
             <div class="col-lg-3">
                 <div class="user-profile-side-bar sidebar-wrap">
                     <div class="sidebar-box p-4 about text-center ftco-animate">
-                        <h2 class="heading mb-4">About Me</h2>
-                        <img src="images/author.jpg" class="img-fluid" alt="Colorlib Template">
+                        <h2 class="heading mb-4">{{user.username}}</h2>
+                        {% if user.image %}
+                        <img src="{{user.image.url}}" class="img-fluid" alt="Colorlib Template">
+                        {% else %}
+                        <img src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png" class="img-fluid" alt="Colorlib Template">
+                        {% endif %}
                         <div class="text pt-4">
-                            <p>Hi! My name is <strong>Cathy Deon</strong>, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics,
-                                a large language ocean.</p>
+                            <p>Hi! My name is <strong>{{user.first_name}} {{user.last_name}}</strong>, {{user.info}}</p>
                         </div>
                     </div>
                     <div class="sidebar-box ftco-animate user-profile">
@@ -27,12 +30,7 @@
                         <a href="single.html" class="btn btn-hover-color py-2">Create recipe </a>
                     </div>
                     <div class="sidebar-box p-4 ftco-animate">
-                        <form action="#" class="search-form">
-                            <div class="form-group">
-                                <span class="icon icon-search"></span>
-                                <input type="text" class="form-control" placeholder="Search">
-                            </div>
-                        </form>
+                        
                     </div>
                 </div>
             </div>
@@ -43,6 +41,7 @@
                     </div>
                 </div>
                 <div class="row">
+                    {% for story in user.stories.all %}
                     <div class="col-md-4 ftco-animate">
                         <div class="blog-entry">
                             <a class="img-2">
@@ -52,51 +51,18 @@
                                     <button type="button" class="delete-event"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                 </div>
 
-                                <img src="images/blog-1.jpg" class="img-fluid" alt="Colorlib Template">
+                                <img src="{{story.image.url}}" class="img-fluid" alt="Colorlib Template">
                             </a>
                             <div class="text pt-3">
-                                <p class="meta d-flex"><span class="pr-3">Dessert</span><span class="ml-auto pl-3">March 01, 2018</span>
+                                <p class="meta d-flex"><span class="pr-3">{{story.category}}</span><span class="ml-auto pl-3">{{story.date | date:'M d, Y'}}</span>
                                 </p>
-                                <h3><a href="#">Tasty &amp; Delicious Foods</a></h3>
-                                <p class="mb-0"><a href="single.html" class="btn btn-black py-2">Read More <span
+                                <h3><a href="#">{{story.title}}</a></h3>
+                                <p class="mb-0"><a href="{% url 'core:story_detail' story.id%}" class="btn btn-black py-2">Read More <span
                                     class="icon-arrow_forward ml-4"></span></a></p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 ftco-animate">
-                        <div class="blog-entry">
-                            <a class="img-2">
-                                <div class="user-events__edit">
-                                    <button type="button" class="edit-event"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                                    <button type="button" class="delete-event"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                </div>
-                                <img src="images/blog-2.jpg" class="img-fluid" alt="Colorlib Template"></a>
-                            <div class="text pt-3">
-                                <p class="meta d-flex"><span class="pr-3">Dessert</span><span class="ml-auto pl-3">March 01, 2018</span>
-                                </p>
-                                <h3><a href="#">Tasty &amp; Delicious Foods</a></h3>
-                                <p class="mb-0"><a href="single.html" class="btn btn-black py-2">Read More <span
-                                    class="icon-arrow_forward ml-4"></span></a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 ftco-animate">
-                        <div class="blog-entry">
-                            <a class="img-2">
-                                <div class="user-events__edit">
-                                    <button type="button" class="edit-event"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                                    <button type="button" class="delete-event"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                </div>
-                                <img src="images/blog-3.jpg" class="img-fluid" alt="Colorlib Template"></a>
-                            <div class="text pt-3">
-                                <p class="meta d-flex"><span class="pr-3">Dessert</span><span class="ml-auto pl-3">March 01, 2018</span>
-                                </p>
-                                <h3><a href="#">Tasty &amp; Delicious Foods</a></h3>
-                                <p class="mb-0"><a href="single.html" class="btn btn-black py-2">Read More <span
-                                    class="icon-arrow_forward ml-4"></span></a></p>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
 

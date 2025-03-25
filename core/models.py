@@ -1,9 +1,10 @@
 from django.db import models
-
+from accounts.models import User
 
 #Recipe, User, Story Comment Category, Tag, Contact, Subscriber
 
 class Story(models.Model):
+    user = models.ForeignKey(User, related_name='stories', on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=200)
     description = models.TextField()
     image = models.ImageField(upload_to='files/')
