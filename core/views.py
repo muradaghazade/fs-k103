@@ -18,15 +18,25 @@ def home(request):
 
 
 def story_detail(request, id):
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save()
+            comment.user = request.user
+            comment.story = Story.objects.get(id=id)
+            comment.save()
+            return redirect('core:story_detail', id=id)
     story = Story.objects.get(id=id)
     categories = Category.objects.all()
     tags = Tag.objects.all()
     recent_stories = Story.objects.order_by('-id')[:3]
+    form = CommentForm()
     context = {
         'story': story,
         'categories': categories,
         'tags': tags,
         'recent_stories': recent_stories,
+        'form':form
     }
     return render(request, 'single.html', context)
 
