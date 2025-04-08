@@ -15,7 +15,8 @@
                 {% if request.user.is_authenticated %}
                 <li><a href="{% url 'accounts:user_profile' request.user.id%}" class="btn btn-black px-3 px-md-4 py-3 mr-1">{{request.user.username}}</a></li>
                 <li>
-                    <form action="{% url 'accounts:logout' %}">
+                    <form method="post" action="{% url 'accounts:logout' %}">
+                        {% csrf_token %}
                         <button href="" class="btn btn-black px-3 px-md-4 py-3 ">Logout</button>
                     </form>
 

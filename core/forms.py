@@ -21,3 +21,17 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'text': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter Your Comment'}),
         }
+
+
+class StoryForm(forms.ModelForm):
+    class Meta:
+        model = Story
+        fields = ['title', 'description', 'image', 'text', 'category', 'tag']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Title'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description'}),
+            'text': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Text'}),
+            'image': forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'Image'}),
+            'category': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Category'}),
+            'tag': forms.SelectMultiple(attrs={'class': 'form-control', 'placeholder': 'Tag'}),
+        }

@@ -105,3 +105,11 @@ def recipe_detail(request, id):
         'recent_stories': recent_recipes,
     }
     return render(request, 'single.html', context)
+
+
+def create_story(request):
+    form = StoryForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'create_story.html', context)
