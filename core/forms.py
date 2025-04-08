@@ -35,3 +35,17 @@ class StoryForm(forms.ModelForm):
             'category': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Category'}),
             'tag': forms.SelectMultiple(attrs={'class': 'form-control', 'placeholder': 'Tag'}),
         }
+
+
+class RecipeForm(forms.ModelForm):
+    class Meta:
+        model = Recipe
+        fields = ['title', 'description', 'image', 'text', 'category', 'tag']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Title'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description'}),
+            'text': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Text'}),
+            'image': forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'Image'}),
+            'category': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Category'}),
+            'tag': forms.SelectMultiple(attrs={'class': 'form-control', 'placeholder': 'Tag'}),
+        }

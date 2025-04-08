@@ -108,8 +108,30 @@ def recipe_detail(request, id):
 
 
 def create_story(request):
+    if request.method == 'POST':
+        form = StoryForm(request.POST, request.FILES)
+        if form.is_valid():
+            story = form.save()
+            story.user = request.user
+            story.save()
+            return redirect('core:home')
     form = StoryForm()
     context = {
         'form': form
     }
     return render(request, 'create_story.html', context)
+
+
+def create_recipe(request):
+    if request.method == 'POST':
+        form = RecipeForm(request.POST, request.FILES)
+        if form.is_valid():
+            recipe = form.save()
+            recipe.user = request.user
+            recipe.save()
+            return redirect('core:home')
+    form = RecipeForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'create_recipe.html', context)

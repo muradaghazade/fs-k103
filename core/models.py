@@ -18,6 +18,7 @@ class Story(models.Model):
         return self.title
 
 class Recipe(models.Model):
+    user = models.ForeignKey(User, related_name='recipes', on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=200)
     description = models.TextField()
     image = models.ImageField(upload_to='files/')

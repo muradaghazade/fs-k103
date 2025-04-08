@@ -12,4 +12,5 @@ urlpatterns = [
     path('recipes/', recipes, name='recipes'),
     path('recipe/<int:id>/', recipe_detail, name='recipe_detail'),
     path('create_story', create_story, name='create_story'),
+    path('create_recipe', create_recipe, name='create_recipe'),
 ]
