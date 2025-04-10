@@ -23,6 +23,15 @@ class CommentForm(forms.ModelForm):
         }
 
 
+class RecipeCommentForm(forms.ModelForm):
+    class Meta:
+        model = RecipeComment
+        fields = ['text']
+        widgets = {
+            'text': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter Your Comment'}),
+        }
+
+
 class StoryForm(forms.ModelForm):
     class Meta:
         model = Story

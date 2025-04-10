@@ -94,6 +94,15 @@ def recipes(request):
 
 
 def recipe_detail(request, id):
+    if request.method == 'POST':
+        form = RecipeCommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save()
+            comment.user = request.user
+            comment.recipe = Recipe.objects.get(id=id)
+            comment.save()
+            return redirect('core:recipe_detail', id=id)
+    form = RecipeCommentForm()
     recipe = Recipe.objects.get(id=id)
     categories = Category.objects.all()
     tags = Tag.objects.all()
@@ -103,6 +112,7 @@ def recipe_detail(request, id):
         'categories': categories,
         'tags': tags,
         'recent_stories': recent_recipes,
+        'form':form,
     }
     return render(request, 'single.html', context)
 
