@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import CreateView
-from accounts.forms import RegisterForm, LoginForm
+from django.views.generic import CreateView, UpdateView
+from accounts.forms import *
 from accounts.models import User
 from django.contrib.auth.views import LoginView
 
@@ -10,6 +10,11 @@ class RegisterView(CreateView):
     form_class = RegisterForm
     success_url = '/accounts/login/'
 
+class EditProfile(UpdateView):
+    model = User
+    template_name = 'edit_profile.html'
+    form_class = EditProfileForm
+    success_url = '/'
 
 class LoginUser(LoginView):
     template_name = 'login.html'
